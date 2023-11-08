@@ -6,8 +6,10 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TextField } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
+import Tooltip from '@mui/material/Tooltip';
 
-export default function AddCustomer(props) {
+export default function EditCustomer(props) {
 
     const [open, setOpen] = useState(false);
     const [customer, setCustomer] = useState({
@@ -22,6 +24,17 @@ export default function AddCustomer(props) {
     const { saveObject } = props;
 
     const handleClickOpen = () => {
+        const { customer } = props;
+        // console.log(customer.links[0].href)
+        setCustomer({
+            firstname: customer.firstname,
+            lastname: customer.lastname,
+            streetaddress: customer.streetaddress,
+            postcode: customer.postcode,
+            city: customer.city,
+            email: customer.email,
+            phone: customer.phone
+        })
         setOpen(true);
     }
 
@@ -33,23 +46,29 @@ export default function AddCustomer(props) {
         setCustomer({ ...customer, [event.target.name]: event.target.value })
     };
 
-    const handleSave = () => {
-        saveObject(customer, 'http://traineeapp.azurewebsites.net/api/customers', 'post');
+    const handleUpdate = () => {
+        saveObject(customer, props.customer.links[0].href, 'put');
         setOpen(false);
     };
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                New Customer
-            </Button>
+            <Tooltip title="Edit customer">
+                <EditIcon
+                    color="secondary"
+                    cursor='pointer'
+                    fontSize='small'
+                    onClick={handleClickOpen}
+                />
+            </Tooltip>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Add new customer</DialogTitle>
+                <DialogTitle>Edit customer</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
                         margin="dense"
                         id="firstname"
+                        value={customer.firstname}
                         name="firstname"
                         label="Firstname"
                         type="text"
@@ -61,6 +80,7 @@ export default function AddCustomer(props) {
                         autoFocus
                         margin="dense"
                         id="lastname"
+                        value={customer.lastname}
                         name="lastname"
                         label="Lastname"
                         type="text"
@@ -72,6 +92,7 @@ export default function AddCustomer(props) {
                         autoFocus
                         margin="dense"
                         id="streetaddress"
+                        value={customer.streetaddress}
                         name="streetaddress"
                         label="Streetaddress"
                         type="text"
@@ -83,6 +104,7 @@ export default function AddCustomer(props) {
                         autoFocus
                         margin="dense"
                         id="postcode"
+                        value={customer.postcode}
                         name="postcode"
                         label="Postcode"
                         type="text"
@@ -94,6 +116,7 @@ export default function AddCustomer(props) {
                         autoFocus
                         margin="dense"
                         id="city"
+                        value={customer.city}
                         name="city"
                         label="City"
                         type="text"
@@ -105,6 +128,7 @@ export default function AddCustomer(props) {
                         autoFocus
                         margin="dense"
                         id="email"
+                        value={customer.email}
                         name="email"
                         label="Email"
                         type="email"
@@ -116,6 +140,7 @@ export default function AddCustomer(props) {
                         autoFocus
                         margin="dense"
                         id="phone"
+                        value={customer.phone}
                         name="phone"
                         label="phone"
                         type="Phone"
@@ -126,7 +151,7 @@ export default function AddCustomer(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleSave}>Save</Button>
+                    <Button onClick={handleUpdate}>Update</Button>
                 </DialogActions>
             </Dialog>
         </div>

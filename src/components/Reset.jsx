@@ -10,11 +10,11 @@ export default function Reset() {
             },
         }
         fetch("https://traineeapp.azurewebsites.net/reset", options)
-        .catch(error => console.error(error))  
+            .catch(error => console.error(error))
     };
 
 
-    return(
+    return (
         <div>
             <Button onClick={resetApi}>Reset</Button>
         </div>
