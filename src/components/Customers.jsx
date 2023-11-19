@@ -8,10 +8,16 @@ import Tooltip from '@mui/material/Tooltip';
 import AddCustomer from './AddCustomer';
 import EditCustomer from './EditCustomer';
 import AddExercise from './AddExcercise';
+import ExportCsv from './ExportCsv';
 
 export default function Customers() {
+    const [gridApi, setGridApi] = useState(null);
 
     useEffect(() => fetchData(), []);
+
+    const onGridReady = (params) => {
+        setGridApi(params.api);
+    };
 
     const [customers, setCustomers] = useState([]);
 
@@ -49,6 +55,7 @@ export default function Customers() {
     const columns = [
         {
             headerName: "Customer Name",
+            field: "customerName",
             valueGetter: params => {
                 return `${params.data.firstname} ${params.data.lastname}`;
             }
@@ -100,9 +107,11 @@ export default function Customers() {
     return (
         <div>
             <AddCustomer saveObject={saveObject} />
+            <ExportCsv gridApi={gridApi} />
             <div className='ag-theme-material'
                 style={{ height: "1000px", width: "1600px", margin: 'auto' }}>
                 <AgGridReact
+                    onGridReady={onGridReady}
                     columnDefs={columns}
                     rowData={customers}
                     defaultColDef={{
