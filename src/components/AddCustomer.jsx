@@ -37,6 +37,7 @@ export default function AddCustomer(props) {
         saveObject(customer, 'http://traineeapp.azurewebsites.net/api/customers', 'post');
         setOpen(false);
     };
+    
 
     return (
         <div>
