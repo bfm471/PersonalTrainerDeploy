@@ -3,7 +3,7 @@ import { Tabs, Tab } from '@mui/material';
 import Welcome from './Welcome';
 import Customers from './Customers';
 import Exercises from './Exercises';
-import Calender from './Calender';
+import MyCalendar from './Calender';
 
 export default function TabApp() {
     const [value, setValue] = useState("home");
@@ -23,7 +23,7 @@ export default function TabApp() {
             {value === 'home' && <div><Welcome /></div>}
             {value === 'customers' && <div><Customers /></div>}
             {value === 'exercises' && <div><Exercises /></div>}
-            {value === 'calender' && <div><Calender /></div>}
+            {value === 'calender' && <div><MyCalendar /></div>}
         </div>
 
     )

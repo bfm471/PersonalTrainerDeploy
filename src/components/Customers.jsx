@@ -4,6 +4,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
+import Stack from '@mui/material/Stack';
 
 import AddCustomer from './AddCustomer';
 import EditCustomer from './EditCustomer';
@@ -106,8 +107,10 @@ export default function Customers() {
 
     return (
         <div>
-            <AddCustomer saveObject={saveObject} />
-            <ExportCsv gridApi={gridApi} />
+            <Stack direction="row" alignItems="flex-end" justifyContent="flex-end" useFlexGap spacing={30} mt={3}>
+                <AddCustomer saveObject={saveObject} />
+                <ExportCsv gridApi={gridApi} />
+            </Stack>
             <div className='ag-theme-material'
                 style={{ height: "1000px", width: "1600px", margin: 'auto' }}>
                 <AgGridReact

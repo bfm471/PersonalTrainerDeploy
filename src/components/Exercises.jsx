@@ -3,7 +3,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
 import dayjs from 'dayjs';
-import { Tooltip } from '@mui/material';
+import { Button, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Exercises() {
